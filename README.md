@@ -14,7 +14,7 @@ homemade photo booth that a few people asked about. It's documentation only.
   See [food](food/README.md).
 - **Photo booth:** tap the moon, smile for 3·2·1, take your photo home by QR code or email.
   See [photo booth](photo-booth/README.md) for how it works and why it's built the way it is.
-- **Share the treats:** three local causes you can give to directly (below).
+- **Share the treats:** three local causes you can give to directly (below, and [its own page](share-the-treats.md)).
 
 ## Share the treats
 
@@ -30,15 +30,14 @@ gift goes straight to the organization.
 
 ## The posters
 
-All printed at 13 x 19 in. PDFs are in [posters](posters/).
+All printed at 13 x 19 in. See [the posters](posters/README.md) for previews and print-ready
+PDFs. Each one's text is also a page here:
 
-| Poster | What it's for |
-| --- | --- |
-| [1 Photo Booth How-To](posters/1%20Photo%20Booth%20How-To.pdf) | Six steps to a photo |
-| [2 Chili Night Menu](posters/2%20Chili%20Night%20Menu.pdf) | Pick your chili, how you want it, toppings |
-| [3 Chili Ingredients and Nutrition](posters/3%20Chili%20Ingredients%20and%20Nutrition.pdf) | Everything in it, nutrition and allergens |
-| [4 Share the Treats](posters/4%20Share%20the%20Treats.pdf) | The three local causes |
-| [Photo Booth Nerd Signs](posters/Photo%20Booth%20-%20Nerd%20Signs%20(13x19).pdf) | How it works, and why it's built this way |
+- [Photo Booth How-To](photo-booth/how-to-use.md)
+- [Chili Night Menu](food/README.md)
+- [What's in the Chili](food/ingredients-and-nutrition.md): ingredients, nutrition, allergens
+- [Share the Treats](share-the-treats.md)
+- The two photo booth "nerd signs" are expanded into the [photo booth deep dive](photo-booth/README.md)
 
 ## The code
 

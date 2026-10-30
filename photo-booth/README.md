@@ -5,7 +5,8 @@ your photo home by QR code or email. A little gallery screen loops everyone's ph
 every photo carries a surprise: a snapshot of the driveway at that moment and a count of
 how many people had come by.
 
-This page is the long version of the two "nerd signs" at the booth.
+New here? Start with [how to use it](how-to-use.md). This page is the long version of the
+two "nerd signs" at the booth, and the [deep dive](#the-deep-dive) goes further.
 ([Back to the whole night](../README.md))
 
 | How it works | Why it's built this way |
@@ -29,6 +30,19 @@ This page is the long version of the two "nerd signs" at the booth.
 ## The map
 
 ![How the photo booth is wired](how-its-wired.png)
+
+## The deep dive
+
+For the nerds: every chip, message, layer and threshold, with diagrams drawn from the real
+code and real measurements.
+
+| | |
+| --- | --- |
+| [The booth tablet](deep-dive/tablet.md) | ESP32-P4 camera pipeline, camera tuning for a dark driveway, light control, the screens, FreeRTOS tasks, the gallery screen, bugs worth telling |
+| [One photo, start to finish](deep-dive/one-photo.md) | every message with its timeout, the backend API, how the finished photo's layers are built, what's saved, email, what happens when something is down |
+| [The people counter](deep-dive/people-counter.md) | 4K stream → YOLO11n → ByteTrack, counting someone once, the benchmark surprise, what it stores, honest limits |
+| [focus-keeper](deep-dive/focus-keeper.md) | the control loop, the Laplacian sharpness score, the sweep, real day and night data |
+| [Where everything runs](deep-dive/where-it-runs.md) | VMs vs containers, the only way in from the internet, privacy precisely |
 
 ## The parts
 
@@ -113,10 +127,13 @@ people-counting AI, which needs gigabytes of memory.
   Tunnel.
 - Each shared photo gets a random 32-character name, and nothing lists them, so only someone
   with the exact link can see it.
-- Your email address is used once to send the photo and isn't kept.
-- The people counter counts people, not faces: it detects that a person is there, not who
-  it is.
+- The booth doesn't save your email address. (The account that sends it keeps the sent
+  message, like any sent mail.)
+- The people counter counts people, not faces. It keeps a small picture of each person on
+  our home network for its dashboard, deleted after 30 days.
 - The start screen tells guests that photos are saved and that a second camera is in use.
+
+The details are in [where everything runs](deep-dive/where-it-runs.md#privacy-precisely).
 
 ## Built with free software
 

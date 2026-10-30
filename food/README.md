@@ -1,6 +1,7 @@
 # Chili Night 2026
 
-Real food, made from scratch. Happy Halloween!
+Real food, made from scratch. Happy Halloween! The menu below is the text of
+[poster 2](../posters/2%20Chili%20Night%20Menu.pdf). ([Back to the night](../README.md))
 
 ## The menu
 
@@ -22,8 +23,13 @@ Real food, made from scratch. Happy Halloween!
 **3. Pile on the toppings:** diced white onion, shredded mild cheddar, sour cream, and
 five hot sauces. The one marked HOT means it.
 
-Full ingredients, nutrition and allergens are on
-[poster 3](../posters/3%20Chili%20Ingredients%20and%20Nutrition.pdf). Ours is a home
+**Taking it to go?** Just ask for a lidded cup.
+
+*2,000 calories a day is used for general nutrition advice, but calorie needs vary. Toppings
+are not included in the calories.*
+
+Full ingredients, nutrition and allergens: [what's in the chili](ingredients-and-nutrition.md)
+(also [poster 3](../posters/3%20Chili%20Ingredients%20and%20Nutrition.pdf)). Ours is a home
 kitchen and isn't allergen-free; if you have a food allergy, ask us and we'll show you the
 labels.
 
