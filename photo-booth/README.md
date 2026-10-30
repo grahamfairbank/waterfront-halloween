@@ -28,37 +28,7 @@ This page is the long version of the two "nerd signs" at the booth.
 
 ## The map
 
-```mermaid
-flowchart LR
-  subgraph booth["At the booth"]
-    tablet["Booth tablet<br/>ESP32-P4 + camera"]
-    light["Key Light Mini"]
-    gallery["Gallery screen<br/>ESP32-S3"]
-  end
-  subgraph house["In the house"]
-    subgraph esxi["VMware ESXi server"]
-      pier["pier (VM)<br/>Docker: booth app, shared-photo site,<br/>tunnel, focus-keeper"]
-      silo["silo (VM)<br/>photo storage"]
-    end
-    big["Higher-powered server<br/>Docker: people counter (YOLO11n)"]
-    cams["Reolink 4K cameras<br/>on the driveway"]
-  end
-  subgraph net["The internet"]
-    gmail["Gmail"]
-    cf["Cloudflare<br/>photos.gfair.dev"]
-    phone["Your phone"]
-  end
-  tablet -- "photo (Wi-Fi)" --> pier
-  pier -- "finished photo" --> tablet
-  tablet -- "on / off" --> light
-  pier -- "tonight's photos" --> gallery
-  pier -- "save (NFS)" --> silo
-  cams -- "snapshot" --> pier
-  cams -- "4K video" --> big
-  big -- "visitor count" --> pier
-  pier -- "email" --> gmail --> phone
-  pier -- "shared photo (tunnel)" --> cf -- "QR link" --> phone
-```
+![How the photo booth is wired](how-its-wired.png)
 
 ## The parts
 
@@ -71,7 +41,7 @@ flowchart LR
 | Counter camera | Reolink 4K camera on an NVR | Video for the people counter |
 | pier | Ubuntu virtual machine on a VMware ESXi server | Runs the booth app and friends in Docker |
 | silo | Ubuntu virtual machine on the same ESXi server | Stores every photo (NFS) |
-| Higher-powered server | Intel i5-12400 desktop, Ubuntu, Docker | Runs the people counter |
+| wharf | A more powerful PC (Intel i5-12400), Ubuntu, Docker | Runs the people counter |
 | 3D prints | Designed in build123d (Python) | Tablet frame, post cap, gallery stand, battery holder |
 | Power | Anker 25K power bank | Runs the tablet all night |
 
@@ -130,7 +100,7 @@ people-counting AI, which needs gigabytes of memory.
   every minute and puts it back to the sharpest position, found by sweeping the lens and
   scoring the picture's sharpness.
 - **Slow counting.** On the first server the people counter could only look at a small,
-  low-resolution stream. Moved to a higher-powered server, it watches the full 4K stream at
+  low-resolution stream. Moved to wharf, a more powerful PC, it watches the full 4K stream at
   4.5 frames a second. (Using one thread per physical CPU core, not two, made it three
   times faster.)
 - **Dead battery.** The power bank died two days before Halloween. A new one was ordered and

@@ -29,16 +29,17 @@ labels.
 
 ## Cooking for 400
 
-- **How much:** 15 gallons in all: 12 of smoky chili (three 4-gallon pots) and 3 of veggie.
-  That's about 385 cups at 5 fl oz, since not every trick-or-treater takes food.
-- **Friday:** everything slow happens the night before. Pork shoulder and pork belly go on
-  the smoker at 275°F for about 3 hours; the beans are boiled hard and simmered; the dried
-  ancho and guajillo chiles become a paste with chipotles and garlic; the veggie chili is
-  cooked start to finish.
-- **Saturday:** only the wet cooking. Each pot gets the aromatics, spices and chile paste,
-  then tomatoes, coffee and cocoa, the meat, and finally the beans and the belly bites
-  (late, so they stay as bites). Masa harina thickens it and a splash of cider vinegar
-  finishes it.
-- **Serving:** five slow cookers on high (four smoky, one veggie), split across two
-  circuits, held at 135°F or hotter, with toppings kept cold over ice. About 70% of
-  visitors come between 4:00 and 6:30, so a refill runner is the most important job.
+15 gallons in all: 12 of smoky chili (three 4-gallon pots) and 3 of veggie. That's about 385
+cups at 5 fl oz, since not every trick-or-treater takes food. The slow work (smoking, beans,
+chile paste, the whole veggie chili) happens Friday night, so Saturday is just cooking and
+serving.
+
+![Chili Night timeline](timeline.png)
+
+- [The recipes](recipes.md): smoky chili and mild veggie chili, as made for 400
+- [The timeline](timeline.md): Wednesday to Saturday, hour by hour
+- [Food safety and the serving table](safety-and-setup.md): holding temperatures, cooling,
+  table layout, power
+- [Shopping list](shopping-list.md): everything, by aisle
+
+It's all a gift to the neighborhood, so there are no prices here.
