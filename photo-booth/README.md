@@ -139,8 +139,30 @@ The details are in [where everything runs](deep-dive/where-it-runs.md#privacy-pr
 
 ESP-IDF, FreeRTOS, LVGL 9, esp_video, Python, FastAPI, Pillow, Docker, Ubuntu, Caddy,
 Cloudflare Tunnel, VMware ESXi, Ultralytics YOLO11, ByteTrack, OpenCV, the Patrick Hand
-font, and build123d for the 3D parts. Written with help from an AI coding assistant
-(Claude).
+font, and build123d for the 3D parts.
+
+## Who wrote all this?
+
+**Claude**, an AI coding assistant, wrote **7,075 lines of code** to make this Halloween
+special, working alongside us over three weeks in October. That's about 18 lines for every
+trick-or-treater we're expecting, or roughly 130 printed pages.
+
+| Part | Lines |
+| --- | ---: |
+| Booth tablet firmware (C, ESP-IDF) | 2,050 |
+| People counter (Python, YOLO11n) | 961 |
+| Photo booth backend: API, compositor, email (Python) | 798 |
+| Repo infographics and the script that draws them | 711 |
+| Signs, posters and the architecture page (HTML) | 675 |
+| 3D-printed mounts (Python, build123d) | 646 |
+| Gallery screen firmware (C) | 633 |
+| Camera-tuning and test scripts, start-screen art | 345 |
+| focus-keeper (Python) | 256 |
+| **Total** | **7,075** |
+
+Non-blank lines written for this project, as of October 30, 2026. Not counted: the
+open-source libraries it stands on, Espressif's drivers (including the touch-driver bugs we
+fixed in them), and the camera's tuning file.
 
 ## Want to build one?
 

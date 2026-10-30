@@ -41,5 +41,8 @@ PDFs. Each one's text is also a page here:
 
 ## The code
 
+Claude, an AI coding assistant, wrote [7,075 lines of it](photo-booth/README.md#who-wrote-all-this)
+to make this Halloween special.
+
 The booth's code isn't published: it would take a lot of cleanup, and the devices that
 run it are working fine. If you're a friend or neighbor who wants it, just ask us.
