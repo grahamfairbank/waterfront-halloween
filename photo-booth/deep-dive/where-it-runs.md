@@ -1,7 +1,7 @@
 # Deep dive: where everything runs
 
-Two physical machines, two virtual machines, five containers, and one way in from the
-internet.
+Two physical machines, two virtual machines, five containers, and two ways in from the
+internet: shared photos for guests, and a password-protected gallery for us.
 ([Back to the deep dive](README.md))
 
 ![Where everything runs](hosting.png)
@@ -33,7 +33,7 @@ time.
 
 All of them restart automatically (`restart: unless-stopped`).
 
-## The only way in
+## Way in #1: a shared photo
 
 A shared photo's link looks like `https://photos.gfair.dev/<32 random characters>.jpg`.
 
@@ -48,13 +48,39 @@ A shared photo's link looks like `https://photos.gfair.dev/<32 random characters
 4. The names come from `secrets.token_urlsafe(24)`: 192 random bits, so they can't be
    guessed or enumerated.
 
-The booth's own API (port 8000) has no login, so it is never exposed. That includes the
-photos page for phones on the home Wi-Fi, which lists every photo of the day.
+## Way in #2: the owner's gallery
+
+`https://gallery.gfair.dev` comes in through the same tunnel to a second, separate Caddy
+gate. It's how we look after the night from a phone, anywhere:
+
+- **Helping someone get their photo.** If a guest's QR scan or email didn't work, we find
+  their photo in today's grid, open it full size, and share it from the phone.
+- **Keeping an eye on the gallery screen.** It's the same list the self-service gallery
+  screen loops, so an accidentally offensive photo is easy to spot. Removing one is done
+  with the Hide button on the photos page on the home network: it moves the session to an
+  archive (nothing is deleted), so it drops off the gallery screen and the grid.
+
+How the gate works:
+
+- One shared password, no username. The login page stores it in a cookie; Caddy compares
+  the cookie with the password from its environment. It's deliberately simple: it keeps the
+  photos off the open internet, but it isn't real authentication.
+- Once in, only `GET` and `HEAD` on `/photos`, `/today`, `/thumb/*`, `/final/*` and the
+  font are passed to the booth app, with the cookie stripped and an `X-Gallery-Public: 1`
+  header. The app then serves its photos page without the status bar and Hide buttons.
+- Everything else (the camera, email, the light, hiding, status) is a 404, and every
+  response carries `X-Robots-Tag: noindex, nofollow` and `Referrer-Policy: no-referrer`.
+
+The booth's own API (port 8000) has no login, so it is never exposed directly; only these
+two gates are. That includes the photos page for phones on the home Wi-Fi, with its Hide
+buttons.
 
 ## Privacy, precisely
 
 - Photos are kept on our own storage (silo). Shared copies can only be reached with their
   exact link.
+- Today's photos can also be browsed at gallery.gfair.dev, behind our password, so we can
+  help guests get their photo and keep the gallery screen tidy.
 - The app never saves your email address. The account that sends the email keeps the sent
   message, like any sent mail.
 - The people counter keeps a small (200 px) picture of each person it counts, on the home
@@ -62,3 +88,4 @@ photos page for phones on the home Wi-Fi, which lists every photo of the day.
   names.
 - The start screen and the how-to poster say that photos are saved and that a second camera
   photographs the booth area.
+

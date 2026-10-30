@@ -42,7 +42,7 @@ code and real measurements.
 | [One photo, start to finish](deep-dive/one-photo.md) | every message with its timeout, the backend API, how the finished photo's layers are built, what's saved, email, what happens when something is down |
 | [The people counter](deep-dive/people-counter.md) | 4K stream → YOLO11n → ByteTrack, counting someone once, the benchmark surprise, what it stores, honest limits |
 | [focus-keeper](deep-dive/focus-keeper.md) | the control loop, the Laplacian sharpness score, the sweep, real day and night data |
-| [Where everything runs](deep-dive/where-it-runs.md) | VMs vs containers, the only way in from the internet, privacy precisely |
+| [Where everything runs](deep-dive/where-it-runs.md) | VMs vs containers, the two ways in from the internet (shared photos and the owner's gallery), privacy precisely |
 
 ## The parts
 
