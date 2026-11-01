@@ -1,8 +1,10 @@
 # Deep dive: the people counter
 
 The "27th visitors today!" on your photo comes from a separate service that watches the
-driveway camera's 4K stream and counts the people it sees, trying hard not to count anyone
-twice. It runs in Docker on wharf, a more powerful PC (Intel i5-12400, 6 cores, 12 threads).
+driveway camera's low-resolution preview stream and counts the people it sees, trying hard
+not to count anyone twice. It runs in Docker on pier, the small always-on server. For the
+2026 event it ran on wharf, a more powerful PC, on the full 4K stream (see
+[Performance](#performance)).
 ([Back to the deep dive](README.md))
 
 ![The people counter](counter.png)
@@ -11,11 +13,11 @@ twice. It runs in Docker on wharf, a more powerful PC (Intel i5-12400, 6 cores, 
 
 | Stage | Detail |
 | --- | --- |
-| Stream | the camera's main stream via the recorder: 3840×2160 HEVC over RTSP, forced to TCP |
-| Capture | OpenCV with FFmpeg in its own thread; decodes about 12.5 frames/s and keeps only the newest frame, so detection never falls behind; reconnects on failure (10 s timeouts) |
-| Detect | Ultralytics **YOLO11n**, people only (class 0), confidence ≥ 0.1, image size 1920, on the CPU with PyTorch set to 6 threads |
+| Stream | the camera's preview sub-stream via the recorder: 640×360 over RTSP, forced to TCP |
+| Capture | OpenCV with FFmpeg in its own thread; keeps only the newest frame, so detection never falls behind; reconnects on failure (10 s timeouts) |
+| Detect | Ultralytics **YOLO11n**, people only (class 0), confidence ≥ 0.1, image size 640, on the CPU with PyTorch set to 3 threads |
 | Track | **ByteTrack**: a new track needs confidence ≥ 0.45, existing tracks keep low-confidence matches ≥ 0.1, match threshold 0.8, a 9-frame buffer (2 s at 4.5 frames/s); a track closes after 2 s unseen |
-| Rate | paced to 4.5 frames/s; measured 4.2, limited by detection at about 234 ms a frame |
+| Rate | aims for 4.5 frames/s; gets about 3.6, limited by detection at about 332 ms a frame |
 
 ## Counting someone once
 
@@ -46,20 +48,23 @@ a live view and a bar chart.
 
 ## Performance
 
-The first version ran on pier, a 4-vCPU virtual machine, and could only afford the camera's
-640×360 sub-stream: 332 ms a frame. Moving it to wharf and the full 4K stream turned up a
-surprise:
+The counter runs on pier, a 4-vCPU virtual machine, which can only afford the camera's
+640×360 sub-stream: 332 ms a frame, using about 2.7 of its 4 cores. For the 2026 event it ran
+on wharf, a more powerful PC (Intel i5-12400, 6 cores, 12 threads), on the full 4K stream.
+That move turned up a surprise:
 
 | Setup | ms per frame |
 | --- | ---: |
-| old VM, 640 px, sub-stream | 332 |
+| pier, 640 px, sub-stream (now) | 332 |
 | wharf, 1280 px, 12 threads | 289 |
 | wharf, 1280 px, 6 threads | 85 |
-| wharf, 1920 px, 6 threads (now, measured) | 234 |
+| wharf, 1920 px, 6 threads (2026 event, measured) | 234 |
 
 With 12 PyTorch threads on a 6-core CPU, the threads fought each other and the HEVC decoder
-for the same cores. One thread per physical core was 3.4 times faster. At 1920 it uses about
+for the same cores. One thread per physical core was 3.4 times faster. At 1920 it used about
 7 cores' worth of CPU and under 1 GB of memory, with no limits set.
+
+After the event it moved back to pier and the sub-stream, to free up wharf.
 
 ## What it stores
 

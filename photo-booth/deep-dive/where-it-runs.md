@@ -11,9 +11,9 @@ internet: shared photos for guests, and a password-protected gallery for us.
 | Machine | What it is | Runs |
 | --- | --- | --- |
 | Home server | VMware ESXi | the two virtual machines below |
-| pier | Ubuntu 24.04 VM, 4 vCPU, 8 GB | Docker: the booth app, the shared-photo site, the tunnel, focus-keeper |
+| pier | Ubuntu 24.04 VM, 4 vCPU, 8 GB | Docker: the booth app, the shared-photo site, the tunnel, focus-keeper, the people counter |
 | silo | Ubuntu 24.04 VM, 2 vCPU, 4 GB, 600 GB data disk | NFS v4 shares for every session and for shared photos |
-| wharf | a more powerful PC: Intel i5-12400 (6 cores, 12 threads), 32 GB, Ubuntu 24.04 | Docker: the people counter |
+| wharf | a more powerful PC: Intel i5-12400 (6 cores, 12 threads), 32 GB, Ubuntu 24.04 | ran the people counter for the 2026 event (it's back on pier now) |
 
 **Why virtual machines?** One physical server can be several independent computers, each
 with its own operating system, sized for its job and easy to snapshot before a change.

@@ -40,7 +40,7 @@ code and real measurements.
 | --- | --- |
 | [The booth tablet](deep-dive/tablet.md) | ESP32-P4 camera pipeline, camera tuning for a dark driveway, light control, the screens, FreeRTOS tasks, the gallery screen, bugs worth telling |
 | [One photo, start to finish](deep-dive/one-photo.md) | every message with its timeout, the backend API, how the finished photo's layers are built, what's saved, email, what happens when something is down |
-| [The people counter](deep-dive/people-counter.md) | 4K stream → YOLO11n → ByteTrack, counting someone once, the benchmark surprise, what it stores, honest limits |
+| [The people counter](deep-dive/people-counter.md) | camera stream → YOLO11n → ByteTrack, counting someone once, the benchmark surprise, what it stores, honest limits |
 | [focus-keeper](deep-dive/focus-keeper.md) | the control loop, the Laplacian sharpness score, the sweep, real day and night data |
 | [Where everything runs](deep-dive/where-it-runs.md) | VMs vs containers, the two ways in from the internet (shared photos and the owner's gallery), privacy precisely |
 
@@ -53,9 +53,9 @@ code and real measurements.
 | Gallery screen | Waveshare ESP32-S3-Touch-LCD-4.3 (800 x 480) | Loops tonight's photos; tap for a photo's QR code |
 | Driveway camera | Reolink RLC-820A, 4K | The snapshot in every photo |
 | Counter camera | Reolink 4K camera on an NVR | Video for the people counter |
-| pier | Ubuntu virtual machine on a VMware ESXi server | Runs the booth app and friends in Docker |
+| pier | Ubuntu virtual machine on a VMware ESXi server | Runs the booth app, the people counter and friends in Docker |
 | silo | Ubuntu virtual machine on the same ESXi server | Stores every photo (NFS) |
-| wharf | A more powerful PC (Intel i5-12400), Ubuntu, Docker | Runs the people counter |
+| wharf | A more powerful PC (Intel i5-12400), Ubuntu, Docker | Ran the people counter for the 2026 event |
 | 3D prints | Designed in build123d (Python) | Tablet frame, post cap, gallery stand, battery holder |
 | Power | Anker 25K power bank | Runs the tablet all night |
 
@@ -113,10 +113,11 @@ people-counting AI, which needs gigabytes of memory.
   the recorder can't switch autofocus off. A small service, focus-keeper, checks the focus
   every minute and puts it back to the sharpest position, found by sweeping the lens and
   scoring the picture's sharpness.
-- **Slow counting.** On the first server the people counter could only look at a small,
-  low-resolution stream. Moved to wharf, a more powerful PC, it watches the full 4K stream at
-  4.5 frames a second. (Using one thread per physical CPU core, not two, made it three
-  times faster.)
+- **Slow counting.** On pier the people counter could only look at a small,
+  low-resolution stream. For the 2026 event it ran on wharf, a more powerful PC, and watched
+  the full 4K stream at 4.5 frames a second. (Using one thread per physical CPU core, not
+  two, made it three times faster.) Afterwards it moved back to pier and the low-resolution
+  stream, to free up wharf.
 - **Dead battery.** The power bank died two days before Halloween. A new one was ordered and
   a new holder was designed and 3D-printed the same day, with windows so its ports can be
   reached.
