@@ -64,7 +64,10 @@ With 12 PyTorch threads on a 6-core CPU, the threads fought each other and the H
 for the same cores. One thread per physical core was 3.4 times faster. At 1920 it used about
 7 cores' worth of CPU and under 1 GB of memory, with no limits set.
 
-After the event it moved back to pier and the sub-stream, to free up wharf.
+**A design choice.** After the event the counter moved back to pier and the sub-stream on
+purpose. The counter is only needed during events; pier's version is good enough for the
+booth's caption; and it leaves wharf, the more powerful PC, free for its other work. The 4K
+settings are kept, so it can move back to wharf for an event that needs them.
 
 ## What it stores
 

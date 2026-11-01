@@ -117,7 +117,8 @@ people-counting AI, which needs gigabytes of memory.
   low-resolution stream. For the 2026 event it ran on wharf, a more powerful PC, and watched
   the full 4K stream at 4.5 frames a second. (Using one thread per physical CPU core, not
   two, made it three times faster.) Afterwards it moved back to pier and the low-resolution
-  stream, to free up wharf.
+  stream. That was a design choice, not a retreat: the low-resolution count is good enough
+  for the caption, and it keeps the more powerful PC free between events.
 - **Dead battery.** The power bank died two days before Halloween. A new one was ordered and
   a new holder was designed and 3D-printed the same day, with windows so its ports can be
   reached.
